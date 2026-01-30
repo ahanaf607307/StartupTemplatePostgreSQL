@@ -8,9 +8,12 @@ This is a robust startup template for a backend application using Node.js, Expre
 - **OAuth Integration**: Google Login support via `passport-google-oauth20`.
 - **OTP System**: Send and verify OTPs for email verification and password resets.
 - **User Management**: Profile management, user roles (System Owner, Business Owner, Staff, Customer), and details retrieval.
+- **Validation**: Request body and parameter validation using `Zod`.
 - **Database Architecture**: Managed by Prisma ORM with PostgreSQL.
 - **Error Handling**: Centralized error management system.
-- **Mailing**: Integration with `nodemailer` for automated emails.
+- **Mailing**: Integration with `nodemailer` for automated emails with modern, responsive EJS templates.
+- **File Upload System**: Reusable Multer configuration supporting multiple categories (e.g., avatars) with automatic path handling and unique naming.
+- **Static Assets**: Dedicated structure for serving uploaded files (e.g., user avatars) statically.
 - **Security**: CORS, cookie-parser, and middleware-based authorization.
 
 ## 📦 Tech Stack & Packages
@@ -66,16 +69,19 @@ This is a robust startup template for a backend application using Node.js, Expre
 | POST | `/auth/reset-password` | Reset user password (Auth required) |
 | POST | `/auth/change-password` | Change user password (Auth required) | OldPassword - NewPassword Required
 | GET | `/auth/google` | Initiate Google OAuth login |
+| GET | `/auth/google/url` | Get the Google OAuth authorization URL |
 | GET | `/auth/google/callback` | Google OAuth callback URL |
 
 ### User Module (`/api/user`)
 | Method | Route | Description |
 | :--- | :--- | :--- |
-| POST | `/user/register` | Register a new user |
+| POST | `/user/register` | Register a new user (Supports optional avatar upload) |
 | GET | `/user/profile/me` | Get current logged-in user profile |
 | GET | `/user/user-details/:id` | Get specific user details by ID |
 | GET | `/user/all` | Get all users with profiles |
-| POST | `/user/update-user` | Update user information |
+| POST | `/user/update-user` | Update user information (Admin only) |
+| PATCH | `/user/update-profile` | Update current user profile (Auth required) |
+| PATCH | `/user/upload-avatar` | Upload or update user avatar (Auth required) |
 
 ### OTP Module (`/api/otp`)
 | Method | Route | Description |

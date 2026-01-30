@@ -93,12 +93,49 @@ const getAllUsersWithProfile = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateProfile = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { name, email } = req.body;
+
+    // Filter allowed fields
+    const allowedUpdates = {};
+    if (name) allowedUpdates.name = name;
+    if (email) allowedUpdates.email = email;
+
+    // Handle profile picture update if a new file is uploaded
+    if (req.file) {
+      const avatarUrlPath = `uploads/avatars/${req.file.filename}`;
+      const avatarUrl = `${req.protocol}://${req.get('host')}/${avatarUrlPath}`;
+      allowedUpdates.avatarUrl = avatarUrl;
+      allowedUpdates.avatarUrlPath = avatarUrlPath;
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: allowedUpdates,
+    });
+
+    sendResponse(res, {
+      success: true,
+      message: "Profile updated successfully",
+      statusCode: StatusCodes.OK,
+      data: updatedUser,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateUser = async (req, res, next) => {
   try {
     const { userId, ...data } = req.body;
 
+    // This is a generic update, typically for ADMIN use. 
+    // For self-update, use updateProfile.
+
     if (!userId) {
-      return res.status(400).json({ message: "userId required" });
+      throw new DevBuildError("userId is required", StatusCodes.BAD_REQUEST);
     }
 
     const updatedUser = await prisma.user.update({
@@ -106,17 +143,14 @@ const updateUser = async (req, res) => {
       data,
     });
 
-    return res.json({
+    sendResponse(res, {
       success: true,
       message: "User updated successfully",
+      statusCode: StatusCodes.OK,
       data: updatedUser,
     });
   } catch (error) {
-    console.error("updateUser error:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to update user",
-    });
+    next(error);
   }
 };
 
@@ -143,4 +177,4 @@ const uploadAvatar = async (req, res, next) => {
   }
 };
 
-export const UserController = { registerUser, userDetails, getAllUsersWithProfile, updateUser, getUserInfo, uploadAvatar };
+export const UserController = { registerUser, userDetails, getAllUsersWithProfile, updateUser, getUserInfo, uploadAvatar, updateProfile };

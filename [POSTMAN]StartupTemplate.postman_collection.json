@@ -361,6 +361,104 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "461629b3-2a6c-4f6a-bd89-dfbd3aa1ad82",
+                  "src": "/C:/Users/Ahanaf/Pictures/Screenshots/Screenshot (23).png"
+                },
+                {
+                  "key": "name",
+                  "value": "Test User ",
+                  "type": "text",
+                  "uuid": "1443e73c-4601-483d-a0c8-65977e097437"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/user/update-profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "user",
+                "update-profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Avatar Only For User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "158529ba-66df-4ee7-8d23-a3157de822c4",
+                  "src": "/C:/Users/Ahanaf/Pictures/Screenshots/Screenshot (23).png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/user/upload-avatar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "user",
+                "upload-avatar"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }
