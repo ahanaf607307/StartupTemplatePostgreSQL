@@ -4,10 +4,17 @@ import fs from "fs";
 
 /**
  * Reusable Multer Configuration
- * @param {string} folder - The subfolder within uploads/ (e.g., 'avatars', 'docs')
+ * @param {Object} options - Configuration options
+ * @param {string} options.folder - The subfolder within uploads/ (e.g., 'avatars', 'docs')
+ * @param {RegExp} options.allowedTypes - Regex of allowed file types (default: images and docs)
+ * @param {number} options.maxSize - Max file size in bytes (default: 5MB)
  * @returns {multer.Multer} - Multer instance
  */
-export const createMulterUpload = (folder = "others") => {
+export const createMulterUpload = ({
+    folder = "others",
+    allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx/,
+    maxSize = 5 * 1024 * 1024
+} = {}) => {
     const uploadPath = path.join(process.cwd(), "uploads", folder);
 
     // Ensure the directory exists
@@ -27,20 +34,19 @@ export const createMulterUpload = (folder = "others") => {
     });
 
     const fileFilter = (req, file, cb) => {
-        const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx/;
         const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = allowedTypes.test(file.mimetype);
 
         if (extname && mimetype) {
             return cb(null, true);
         } else {
-            cb(new Error("Error: Only images and documents are allowed!"));
+            cb(new Error(`Error: File type not allowed! Allowed types are: ${allowedTypes}`));
         }
     };
 
     return multer({
         storage: storage,
-        limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+        limits: { fileSize: maxSize },
         fileFilter: fileFilter,
     });
 };

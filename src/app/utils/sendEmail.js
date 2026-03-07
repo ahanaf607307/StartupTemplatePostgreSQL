@@ -55,6 +55,9 @@ export const sendEmail = async ({
     console.log(`📧 Email sent to ${to} | ID: ${info.messageId}`);
   } catch (error) {
     console.error("❌ Email sending failed:", error?.message || error);
-    throw new DevBuildError("Failed to send email", 500);
+    if (envVars.NODE_ENV === "production") {
+      throw new DevBuildError("Failed to send email", 500);
+    }
+    console.log("⚠️ Email sending skipped in development.");
   }
 };

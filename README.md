@@ -89,6 +89,21 @@ This is a robust startup template for a backend application using Node.js, Expre
 | POST | `/otp/send` | Send OTP to user email |
 | POST | `/otp/verify` | Verify the sent OTP |
 
+
+---
+
+## 📱 Mobile App Authentication Module
+
+This project includes a dedicated authentication module for mobile applications located in `src/app/modules/MobileApp-Auth`.
+
+- **Usage**: If your project involves a mobile application, you can use this module to handle authentication for any user role.
+- **Removal**: If you do not need mobile-specific authentication, you can safely remove it by following these steps:
+  1. **Delete Folder**: Delete the `src/app/modules/MobileApp-Auth` directory.
+  2. **Clean Router**: In `src/app/router/index.js`, remove the imports and routes for `MobileAuthRoutes`, `MobileUserRoutes`, and `MobileOtpRoutes`.
+  3. **Update Middleware**: In `src/app/middleware/checkAuthMiddleware.js`, remove the conditional block that queries `prisma.mobileUser`.
+  4. **Remove Seeding**: In `src/app/prisma/seed.js`, remove the `mobileUsers` array and the loop that seeds them.
+  5. **Prisma Cleanup**: Delete the `MobileUser` model from `prisma/schema.prisma` and run `npx prisma migrate dev`.
+
 ---
 
 ## Postman Collection > [POSTMAN]StratupTemplate.postman.json

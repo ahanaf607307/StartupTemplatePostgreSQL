@@ -21,7 +21,6 @@ enum OAuthProvider {
   apple
 }
 
-
 model User {
   id                   String        @id @default(uuid())
   name                 String
@@ -40,3 +39,20 @@ model User {
   @@index([role])
 }
 
+model MobileUser {
+  id                   String        @id @default(uuid())
+  name                 String
+  email                String        @unique
+  passwordHash         String?
+  avatarUrl            String?
+  avatarUrlPath        String?
+  role                 UserRole      @default(CUSTOMER)
+  isVerified           Boolean       @default(false)
+  oauthProvider        OAuthProvider @default(email)
+  oauthProviderId      String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  forgotPasswordStatus Boolean       @default(false)
+
+  @@index([role])
+}

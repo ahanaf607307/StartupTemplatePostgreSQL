@@ -7,11 +7,7 @@ dotenv.config();
 const connectDB = async () => {
   try {
     const pool = new Pool({
-      host: envVars.DB_HOST,
-      user: envVars.DB_USER,
-      password: envVars.DB_PASSWORD,
-      database: envVars.DB_NAME,
-      port: envVars.DB_PORT || 5432,
+      connectionString: envVars.DATABASE_URL,
     });
 
     const client = await pool.connect();

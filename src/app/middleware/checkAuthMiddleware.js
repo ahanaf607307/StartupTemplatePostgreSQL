@@ -22,9 +22,18 @@ export const checkAuthMiddleware =
         const jwtToken = token.replace(/^Bearer\s*/i, "");
         const decoded = jwt.verify(jwtToken, envVars.JWT_SECRET_TOKEN);
 
-        const user = await prisma.user.findUnique({
-          where: { id: decoded.id },
-        });
+        // Determine which table to search based on the role or route
+        let user = null;
+        if (decoded.role && decoded.role.toLowerCase() === "customer") {
+          user = await prisma.mobileUser.findUnique({
+            where: { id: decoded.id },
+          });
+        } else {
+          user = await prisma.user.findUnique({
+            where: { id: decoded.id },
+          });
+        }
+        // end of mobile app auth folder validation
 
         if (!user) {
           return res.status(401).json({
@@ -40,7 +49,9 @@ export const checkAuthMiddleware =
           });
         }
 
-        if (!user.isVerified) {
+        const isResetRoute = req.originalUrl.includes("/reset-password");
+
+        if (!user.isVerified && !isResetRoute) {
           return res.status(403).json({
             success: false,
             message: "User is not verified. Please verify your email.",

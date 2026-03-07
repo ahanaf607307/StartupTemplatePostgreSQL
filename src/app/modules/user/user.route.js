@@ -6,7 +6,7 @@ import { createMulterUpload } from "../../config/multer.config.js";
 import validateRequest from "../../middleware/validateRequest.js";
 import { UserValidation } from "./user.validation.js";
 
-const upload = createMulterUpload("avatars");
+const upload = createMulterUpload({ folder: "avatars" });
 
 const router = express.Router();
 
