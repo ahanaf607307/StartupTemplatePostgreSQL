@@ -89,6 +89,29 @@ This is a robust startup template for a backend application using Node.js, Expre
 | POST | `/otp/send` | Send OTP to user email |
 | POST | `/otp/verify` | Verify the sent OTP |
 
+### Mobile Auth Module (`/api/mobile/auth`)
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| POST | `/mobile/auth/login` | Mobile user login |
+| POST | `/mobile/auth/refresh-token` | Refresh mobile access token |
+| POST | `/mobile/auth/change-password` | Change mobile user password (Auth required) |
+| POST | `/mobile/auth/forgot-password` | Initiate forgot password for mobile |
+| POST | `/mobile/auth/verify-forgot-password` | Verify OTP for mobile reset |
+| POST | `/mobile/auth/reset-password` | Reset mobile user password (Auth required) |
+
+### Mobile User Module (`/api/mobile/user`)
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| POST | `/mobile/user/register` | Register a new mobile user (Optional avatar upload) |
+| GET | `/mobile/user/profile/me` | Get mobile user profile (Auth required) |
+| PATCH | `/mobile/user/update-profile` | Update mobile user profile (Auth required) |
+
+### Mobile OTP Module (`/api/mobile/otp`)
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| POST | `/mobile/otp/send` | Send OTP to mobile user email |
+| POST | `/mobile/otp/verify` | Verify OTP for mobile user |
+
 
 ---
 
