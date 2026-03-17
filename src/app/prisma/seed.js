@@ -14,11 +14,7 @@ export const seedDatabase = async () => {
             { email: "admin@test.com", name: "Admin User", role: Role.SYSTEM_OWNER },
         ];
 
-        const mobileUsers = [
-            { email: "mobile1@test.com", name: "Mobile One", role: Role.CUSTOMER },
-            { email: "mobile2@test.com", name: "Mobile Two", role: Role.CUSTOMER },
-            { email: "admin.mobile@text.com", name: "Admin Mobile", role: Role.SYSTEM_OWNER },
-        ];
+
 
         let seedCount = 0;
 
@@ -40,23 +36,7 @@ export const seedDatabase = async () => {
             }
         }
 
-        // Seed Mobile Users
-        for (const user of mobileUsers) {
-            const existingUser = await prisma.mobileUser.findUnique({ where: { email: user.email } });
-            if (!existingUser) {
-                await prisma.mobileUser.create({
-                    data: {
-                        email: user.email,
-                        name: user.name,
-                        passwordHash: passwordHash,
-                        role: user.role,
-                        isVerified: true,
-                    },
-                });
-                seedCount++;
-                console.log(`✅ Mobile user created: ${user.email}`);
-            }
-        }
+
 
         if (seedCount === 0) {
             console.log("ℹ️ Seed data already in database.");

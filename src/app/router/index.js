@@ -6,9 +6,7 @@ import { OtpRouter } from "../modules/otp/otp.route.js";
 
 
 
-import { MobileUserRoutes } from "../modules/MobileApp-Auth/mobileUser/mobileUser.route.js";
-import { MobileAuthRoutes } from "../modules/MobileApp-Auth/mobileAuth/mobileAuth.route.js";
-import { MobileOtpRoutes } from "../modules/MobileApp-Auth/mobileOtp/mobileOtp.route.js";
+
 
 export const router = Router();
 const moduleRoutes = [
@@ -24,18 +22,7 @@ const moduleRoutes = [
     path: "/otp",
     route: OtpRouter,
   },
-  {
-    path: "/mobile/user",
-    route: MobileUserRoutes,
-  },
-  {
-    path: "/mobile/auth",
-    route: MobileAuthRoutes,
-  },
-  {
-    path: "/mobile/otp",
-    route: MobileOtpRoutes,
-  },
+
 ];
 
 moduleRoutes.forEach((route) => {

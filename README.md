@@ -44,7 +44,7 @@ This is a robust startup template for a backend application using Node.js, Expre
    ```
 
 3. **Set up Environment Variables**:
-   Create a `.env` file in the root directory and add your configurations (Database URL, JWT secret, OAuth credentials, etc.).
+   Create a `.env` file in the root directory and add your configurations (Database URL, `BACKEND_URL`, JWT secret, OAuth credentials, Redis URL, SMTP settings, etc.).
 
 4. **Prisma Setup**:
    ```bash
@@ -89,43 +89,12 @@ This is a robust startup template for a backend application using Node.js, Expre
 | POST | `/otp/send` | Send OTP to user email |
 | POST | `/otp/verify` | Verify the sent OTP |
 
-### Mobile Auth Module (`/api/mobile/auth`)
-| Method | Route | Description |
-| :--- | :--- | :--- |
-| POST | `/mobile/auth/login` | Mobile user login |
-| POST | `/mobile/auth/refresh-token` | Refresh mobile access token |
-| POST | `/mobile/auth/change-password` | Change mobile user password (Auth required) |
-| POST | `/mobile/auth/forgot-password` | Initiate forgot password for mobile |
-| POST | `/mobile/auth/verify-forgot-password` | Verify OTP for mobile reset |
-| POST | `/mobile/auth/reset-password` | Reset mobile user password (Auth required) |
 
-### Mobile User Module (`/api/mobile/user`)
-| Method | Route | Description |
-| :--- | :--- | :--- |
-| POST | `/mobile/user/register` | Register a new mobile user (Optional avatar upload) |
-| GET | `/mobile/user/profile/me` | Get mobile user profile (Auth required) |
-| PATCH | `/mobile/user/update-profile` | Update mobile user profile (Auth required) |
-
-### Mobile OTP Module (`/api/mobile/otp`)
-| Method | Route | Description |
-| :--- | :--- | :--- |
-| POST | `/mobile/otp/send` | Send OTP to mobile user email |
-| POST | `/mobile/otp/verify` | Verify OTP for mobile user |
 
 
 ---
 
-## 📱 Mobile App Authentication Module
 
-This project includes a dedicated authentication module for mobile applications located in `src/app/modules/MobileApp-Auth`.
-
-- **Usage**: If your project involves a mobile application, you can use this module to handle authentication for any user role.
-- **Removal**: If you do not need mobile-specific authentication, you can safely remove it by following these steps:
-  1. **Delete Folder**: Delete the `src/app/modules/MobileApp-Auth` directory.
-  2. **Clean Router**: In `src/app/router/index.js`, remove the imports and routes for `MobileAuthRoutes`, `MobileUserRoutes`, and `MobileOtpRoutes`.
-  3. **Update Middleware**: In `src/app/middleware/checkAuthMiddleware.js`, remove the conditional block that queries `prisma.mobileUser`.
-  4. **Remove Seeding**: In `src/app/prisma/seed.js`, remove the `mobileUsers` array and the loop that seeds them.
-  5. **Prisma Cleanup**: Delete the `MobileUser` model from `prisma/schema.prisma` and run `npx prisma migrate dev`.
 
 ---
 
