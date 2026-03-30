@@ -14,10 +14,6 @@ const loadEnvVars = () => {
     "DATABASE_URL",
     "BACKEND_URL",
     "REDIS_URL",
-
-    "STRIPE_SECRET_KEY",
-    "STRIPE_WEBHOOK_SECRET",
-    "CLIENT_URL",
   ];
 
   requiredVars.forEach((key) => {
@@ -58,11 +54,6 @@ const loadEnvVars = () => {
     GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
     // Frontend
     FRONT_END_URL: process.env.FRONT_END_URL,
-
-    // Stripe
-    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    CLIENT_URL: process.env.CLIENT_URL,
   };
 };
 
