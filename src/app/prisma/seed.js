@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import prisma from "./client.js";
 import { Role } from "../utils/role.js";
+import prisma from "./client.js";
 
 export const seedDatabase = async () => {
     try {
@@ -9,8 +9,8 @@ export const seedDatabase = async () => {
         const passwordHash = await bcrypt.hash("123456", 10);
 
         const standardUsers = [
-            { email: "user1@test.com", name: "User One", role: Role.CUSTOMER },
-            { email: "user2@test.com", name: "User Two", role: Role.CUSTOMER },
+            { email: "user1@test.com", name: "User One", role: Role.USER },
+            { email: "user2@test.com", name: "User Two", role: Role.USER },
             { email: "admin@test.com", name: "Admin User", role: Role.SYSTEM_OWNER },
         ];
 

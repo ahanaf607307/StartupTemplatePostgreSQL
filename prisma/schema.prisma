@@ -10,6 +10,7 @@ enum UserRole {
   SYSTEM_OWNER   @map("system_owner")
   BUSINESS_OWNER @map("business_owner")
   STAFF          @map("staff")
+  USER           @map("user")
   CUSTOMER       @map("customer")
 }
 
@@ -35,7 +36,7 @@ model User {
   passwordHash         String?
   avatarUrl            String?
   avatarUrlPath        String?
-  role                 UserRole      @default(CUSTOMER)
+  role                 UserRole      @default(USER)
   isVerified           Boolean       @default(false)
   oauthProvider        OAuthProvider @default(email)
   oauthProviderId      String?
