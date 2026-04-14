@@ -13,7 +13,12 @@
   "type": "module",
   "description": "",
   "dependencies": {
+<<<<<<< HEAD
     "@prisma/client": "^7.4.2",
+=======
+    "@prisma/adapter-pg": "^7.6.0",
+    "@prisma/client": "^7.6.0",
+>>>>>>> 02c7a23b116321809b97b2b10ddd6b02940812b6
     "axios": "^1.13.2",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
@@ -31,11 +36,16 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.16.3",
+    "prisma": "^7.6.0",
     "redis": "^5.10.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "nodemon": "^3.1.9",
     "prisma": "^7.4.2"
+=======
+    "nodemon": "^3.1.9"
+>>>>>>> 02c7a23b116321809b97b2b10ddd6b02940812b6
   }
 }

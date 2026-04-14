@@ -12,7 +12,7 @@ const loadEnvVars = () => {
     "JWT_REFRESH_EXPIRES_IN",
 
     "DATABASE_URL",
-
+    "BACKEND_URL",
     "REDIS_URL",
   ];
 
@@ -35,6 +35,8 @@ const loadEnvVars = () => {
 
     // Database
     DATABASE_URL: process.env.DATABASE_URL,
+
+    BACKEND_URL: process.env.BACKEND_URL,
 
     // Redis
     REDIS_URL: process.env.REDIS_URL,
